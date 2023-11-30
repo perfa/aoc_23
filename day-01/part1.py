@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from resource import RUSAGE_SELF, getrusage
 from time import perf_counter
@@ -5,8 +6,9 @@ from time import perf_counter
 from colorama import Back, Fore, Style, init
 
 init()
-input = open(Path(__file__).parent / "input.txt").read().split()
-output = 0
+final_input = len(sys.argv) == 1
+input = open(Path(__file__).parent / ("input.txt" if final_input else "example_input.txt")).read().split()
+output = open(Path(__file__).parent / ("output.txt" if final_input else "example_output.txt")).read().split()
 identifier = Path(__file__).stem
 
 
