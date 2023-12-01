@@ -21,13 +21,9 @@ if __name__ == "__main__":
     elapsed = perf_counter() - start
     max_rss = getrusage(RUSAGE_SELF)[2] / 1024 / 1024
 
-    if result == output:
-        prefix = "✅ " + Back.GREEN + Fore.WHITE
-    else:
-        prefix = "❌ " + Back.RED + Fore.WHITE
-
-    print(f"\t{prefix}{result}{Style.RESET_ALL}\t{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
+    print(f"\t{result}\t{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
 
 
-def test_part1_example_1():
-    assert True == None
+def test_part2_example_1():
+    input = """TODO"""
+    assert solve(input) == "Not Implemented"

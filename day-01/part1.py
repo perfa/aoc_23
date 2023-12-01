@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 from resource import RUSAGE_SELF, getrusage
 from time import perf_counter
@@ -6,14 +5,17 @@ from time import perf_counter
 from colorama import Back, Fore, Style, init
 
 init()
-final_input = len(sys.argv) == 1
-input = open(Path(__file__).parent / ("input.txt" if final_input else "example_input.txt")).read().split()
-output = open(Path(__file__).parent / ("output.txt" if final_input else "example_output.txt")).read().split()
+input = open(Path(__file__).parent / "input.txt").read()
 identifier = Path(__file__).stem
 
 
 def solve(input):
-    return "Not Implemented"
+    result = 0
+    for line in input.split():
+        line = [x for x in line if x.isdigit()]
+        result += int(line[0]) * 10 + int(line[-1])
+
+    return result
 
 
 if __name__ == "__main__":
@@ -23,13 +25,12 @@ if __name__ == "__main__":
     elapsed = perf_counter() - start
     max_rss = getrusage(RUSAGE_SELF)[2] / 1024 / 1024
 
-    if result == output:
-        prefix = "✅ " + Back.GREEN + Fore.WHITE
-    else:
-        prefix = "❌ " + Back.RED + Fore.WHITE
-
-    print(f"\t{prefix}{result}{Style.RESET_ALL}\t{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
+    print(f"\t{result}\t{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
 
 
 def test_part1_example_1():
-    assert True == None
+    input = """1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet"""
+    assert solve(input) == 142

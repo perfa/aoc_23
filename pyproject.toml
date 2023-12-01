@@ -1,3 +1,6 @@
+[tool.pytest.ini_options]
+python_files = "day*/part*.py"
+
 [tool.black]
 line-length = 120
 
@@ -17,6 +20,7 @@ click = "*"
 pytest = "^7.4.3"
 pytest-clarity = "^1.0.1"
 colorama = "^0.4.6"
+pytest-watch = "^4.2.0"
 
 
 [build-system]
