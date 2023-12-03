@@ -9,7 +9,7 @@ import click
 def main(all):
     print("Running AOC")
     print("===========")
-    directories = sorted(Path(__file__).parent.glob("day-*"))
+    directories = sorted(Path(__file__).parent.glob("src/day-*"))
     if not all:
         directories = [directories[-1]]
 
