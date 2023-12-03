@@ -20,6 +20,7 @@ def main(all):
         part2_path = directory / "part2.py"
         os.system(f"python {part1_path}")
         os.system(f"python {part2_path}")
+        print()
 
 
 if __name__ == "__main__":

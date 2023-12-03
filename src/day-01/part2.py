@@ -58,7 +58,8 @@ if __name__ == "__main__":
     elapsed = perf_counter() - start
     max_rss = getrusage(RUSAGE_SELF)[2] / 1024 / 1024
 
-    print(f"\t{result}\t{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
+    result = str(result).ljust(20)
+    print(f"\t{result}{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
 
 
 def test_part2_example_1():
