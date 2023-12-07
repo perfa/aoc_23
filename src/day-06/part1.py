@@ -1,0 +1,47 @@
+from functools import reduce
+from pathlib import Path
+from resource import RUSAGE_SELF, getrusage
+from time import perf_counter
+
+from colorama import Back, Fore, Style, init
+
+init()
+input = open(Path(__file__).parent / "input.txt").read()
+identifier = Path(__file__).stem
+
+
+def solve(input):
+    times, distances = [
+        [int(n) for n in line.split(":")[1].split()]
+        for line in input.splitlines()
+    ]
+
+    counts = []
+    for time, distance in zip(times, distances):
+        count = 0
+        for duration in range(1, time):
+            d = duration * (time - duration)
+            if d > distance:
+                count += 1
+        counts.append(count)
+            # d*(t-d) = O
+            # -d^2+td-O=0
+            # d^2-td+O = 0
+    return reduce(lambda x,y: x*y, counts, 1)
+
+
+if __name__ == "__main__":
+    print(f"{identifier}:", end="", flush=True)
+    start = perf_counter()
+    result = solve(input)
+    elapsed = perf_counter() - start
+    max_rss = getrusage(RUSAGE_SELF)[2] / 1024 / 1024
+
+    result = str(result).ljust(20)
+    print(f"\t{result}{Style.DIM}{elapsed:0.3f}s {max_rss:0.3f} MAX_RSS{Style.RESET_ALL}")
+
+
+def test_part1_example_1():
+    input = """Time:      7  15   30
+Distance:  9  40  200"""
+    assert solve(input) == 288
