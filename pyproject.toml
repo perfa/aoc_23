@@ -1,7 +1,6 @@
 [tool.pytest.ini_options]
 python_files = "part*.py"
 testpaths = "src"
-verbosity = 2
 
 [tool.black]
 line-length = 120
